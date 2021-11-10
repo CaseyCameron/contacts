@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import AddContact from './components/AddContact';
+import ContactList from './components/ContactList';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  state = {
+    contacts: []
+  }
+
+  handleAddContact = (contact) => {
+    const { contacts } = this.state;
+    const updatedContacts = [...contacts, contact];
+    this.setState({ contacts: updatedContacts });
+  };
+
+  render() {
+    return (
+      <div>
+        <AddContact handleAddContact={this.handleAddContact} />
+        <ContactList contacts={this.state.contacts} />
+      </div>
+    )
+  }
 }
-
-export default App;
